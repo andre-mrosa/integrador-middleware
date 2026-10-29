@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="CLAUDE.md" />
+    <File Path="README.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Integrador.Common/Integrador.Common.csproj" />
+    <Project Path="src/Integrador.UI/Integrador.UI.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/">
+    <Project Path="src/Modules/Integrador.Source/Integrador.Source.csproj" />
+    <Project Path="src/Modules/Integrador.Integration/Integrador.Integration.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Company>Trigénius</Company>
+    <Product>Integrador</Product> <!-- TODO: nome do produto (ex: Integrador CRM-ERP) -->
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Integrador.Common\Integrador.Common.csproj" />
+    <ProjectReference Include="..\Integrador.Source\Integrador.Source.csproj" />
+  </ItemGroup>
+
+</Project>

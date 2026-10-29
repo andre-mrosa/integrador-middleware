@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="TaskScheduler" />
+    <PackageReference Include="Nager.Date" />
+  </ItemGroup>
+
+</Project>

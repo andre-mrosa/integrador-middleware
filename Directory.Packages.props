@@ -1,0 +1,22 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <DevExpressVersion>25.2.3</DevExpressVersion>
+    <MicrosoftExtensionsVersion>10.0.0</MicrosoftExtensionsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Hosting / DI / Http -->
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="$(MicrosoftExtensionsVersion)" />
+
+    <!-- Agendador Windows -->
+    <PackageVersion Include="TaskScheduler" Version="2.12.2" />
+    <!-- Feriados PT para "1º dia útil". Manter na 1.x, versões 2.x exigem licença -->
+    <PackageVersion Include="Nager.Date" Version="1.33.1" />
+
+    <!-- UI -->
+    <PackageVersion Include="DevExpress.Win.BonusSkins" Version="$(DevExpressVersion)" />
+    <PackageVersion Include="DevExpress.Win.Design" Version="$(DevExpressVersion)" />
+  </ItemGroup>
+</Project>
