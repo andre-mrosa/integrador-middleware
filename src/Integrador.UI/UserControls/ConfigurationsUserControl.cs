@@ -58,13 +58,11 @@ namespace Integrador.UI.UserControls
 
         private async void sbTestSource_Click(object sender, EventArgs e)
         {
-            // O cliente da origem usa as configurações guardadas
-            if (!EnsureSaved()) return;
-
             using IOverlaySplashScreenHandle overlay = SplashScreenManager.ShowOverlayForm(this);
             try
             {
-                await _source.TestConnectionAsync();
+                // Testa o que está no ecrã, guardado ou não
+                await _source.TestConnectionAsync(ReadForm(new IntegratorSettings()));
                 overlay.Close();
                 XtraMessageBox.Show($"Ligação a {AppInfo.SourceName} efetuada com sucesso.", AppInfo.SourceName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -72,7 +70,8 @@ namespace Integrador.UI.UserControls
             {
                 await _logger.ErrorAsync(nameof(ConfigurationsUserControl), $"Teste de ligação a {AppInfo.SourceName} falhou.", ex);
                 overlay.Close();
-                XtraMessageBox.Show($"Não foi possível ligar a {AppInfo.SourceName}.\n{ex.Message}", AppInfo.SourceName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                string message = ex is SourceApiException source ? source.Detail : ex.GetBaseException().Message;
+                XtraMessageBox.Show($"Não foi possível ligar a {AppInfo.SourceName}.\n{message}", AppInfo.SourceName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -108,41 +107,23 @@ namespace Integrador.UI.UserControls
             }
         }
 
-        private void Save()
-        {
-            var settings = _settingsService.Get();
-
-            settings.SourceUrl = teSourceUrl.Text.Trim();
-            settings.SourceApiKey = teSourceApiKey.Text.Trim();
-            settings.SourceUser = teSourceUser.Text.Trim();
-            settings.SourcePassword = teSourcePassword.Text;
-
-            settings.TargetUrl = teTargetUrl.Text.Trim();
-            settings.TargetUser = teTargetUser.Text.Trim();
-            settings.TargetPassword = teTargetPassword.Text;
-
-            _settingsService.Save(settings);
-        }
+        private void Save() => _settingsService.Save(ReadForm(_settingsService.Get()));
 
         /// <summary>
-        /// Se houver alterações por guardar pergunta se quer guardar antes de testar.
+        /// Copia os campos do ecrã para <paramref name="target"/>. Para guardar (sobre as configurações atuais) ou só para testar (objeto novo).
         /// </summary>
-        private bool EnsureSaved()
+        private IntegratorSettings ReadForm(IntegratorSettings target)
         {
-            var s = _settingsService.Get();
+            target.SourceUrl = teSourceUrl.Text.Trim();
+            target.SourceApiKey = teSourceApiKey.Text.Trim();
+            target.SourceUser = teSourceUser.Text.Trim();
+            target.SourcePassword = teSourcePassword.Text;
 
-            bool changed = s.SourceUrl != teSourceUrl.Text.Trim() || s.SourceApiKey != teSourceApiKey.Text.Trim()
-                           || s.SourceUser != teSourceUser.Text.Trim() || s.SourcePassword != teSourcePassword.Text
-                           || s.TargetUrl != teTargetUrl.Text.Trim() || s.TargetUser != teTargetUser.Text.Trim()
-                           || s.TargetPassword != teTargetPassword.Text;
+            target.TargetUrl = teTargetUrl.Text.Trim();
+            target.TargetUser = teTargetUser.Text.Trim();
+            target.TargetPassword = teTargetPassword.Text;
 
-            if (!changed) return true;
-
-            if (XtraMessageBox.Show("Existem alterações por guardar. Guardar antes de testar?", "Questão", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-                return false;
-
-            Save();
-            return true;
+            return target;
         }
 
         private void teSourcePassword_ButtonClick(object sender, ButtonPressedEventArgs e) => TogglePasswordVisibility(sender, e);

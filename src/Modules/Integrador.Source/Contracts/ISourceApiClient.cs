@@ -1,3 +1,5 @@
+using Integrador.Common.Settings;
+
 namespace Integrador.Source.Contracts;
 
 /// <summary>
@@ -23,4 +25,9 @@ public interface ISourceApiClient
 
     /// <summary>Faz login com as configurações atuais. Usado no botão de teste e no arranque.</summary>
     Task TestConnectionAsync(CancellationToken ct = default);
+
+    /// <summary>
+    /// Faz login com estes valores (ex: os do ecrã, ainda por guardar) sem tocar no token em uso.
+    /// </summary>
+    Task TestConnectionAsync(IntegratorSettings settings, CancellationToken ct = default);
 }

@@ -52,7 +52,7 @@ internal sealed class SourceTokenProvider
             // Outro pedido pode ter renovado enquanto esperávamos
             if (IsValid) return _token!;
 
-            _token = await LoginAsync(ct);
+            _token = await LoginAsync(_settings.Get(), ct);
             _expiresAt = DateTime.Now.Add(_tokenLifetime);
 
             await _logger.InfoAsync(Source, $"Novo token da origem obtido. Válido até {_expiresAt:dd/MM/yyyy HH:mm}.");
@@ -66,10 +66,11 @@ internal sealed class SourceTokenProvider
 
     private bool IsValid => !string.IsNullOrWhiteSpace(_token) && DateTime.Now < _expiresAt;
 
-    private async Task<string> LoginAsync(CancellationToken ct)
+    /// <summary>
+    /// POST /login com estes valores. Não guarda o token: o GetTokenAsync guarda-o, o teste do ecrã de configurações não.
+    /// </summary>
+    public async Task<string> LoginAsync(IntegratorSettings s, CancellationToken ct)
     {
-        var s = _settings.Get();
-
         if (string.IsNullOrWhiteSpace(s.SourceApiKey) || string.IsNullOrWhiteSpace(s.SourceUser) || string.IsNullOrWhiteSpace(s.SourcePassword))
             throw new InvalidOperationException("Credenciais da origem incompletas. Verifique as configurações.");
 
@@ -83,11 +84,21 @@ internal sealed class SourceTokenProvider
         string body = await response.Content.ReadAsStringAsync(ct);
 
         if (!response.IsSuccessStatusCode)
+        {
+            await _logger.WriteAsync(LogLevel.ERROR, Source, $"Erro na autenticação na origem ({(int)response.StatusCode}).", body);
             throw new HttpRequestException($"Erro na autenticação na origem ({(int)response.StatusCode}): {body}", null, response.StatusCode);
+        }
+
+        // Credenciais erradas vêm com HTTP 200 e error = "true"
+        if (SourceApiClient.ReadError("/login", body) is { } error)
+        {
+            await _logger.WriteAsync(LogLevel.ERROR, Source, $"Autenticação na origem recusada: {error.Detail}", body);
+            throw error;
+        }
 
         var login = System.Text.Json.JsonSerializer.Deserialize<LoginResponse>(body, SourceJson.Options);
 
-        if (login?.Error == true || string.IsNullOrWhiteSpace(login?.Token))
+        if (string.IsNullOrWhiteSpace(login?.Token))
             throw new InvalidOperationException($"A autenticação na origem não devolveu token. {login?.Message}");
 
         return login.Token;
