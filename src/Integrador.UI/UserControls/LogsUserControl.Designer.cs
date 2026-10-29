@@ -32,7 +32,7 @@
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             lblTitle = new DevExpress.XtraEditors.LabelControl();
             lblSubtitle = new DevExpress.XtraEditors.LabelControl();
-            sbFilter = new DevExpress.XtraEditors.SimpleButton();
+            beSearch = new DevExpress.XtraEditors.ButtonEdit();
             deEndDate = new DevExpress.XtraEditors.DateEdit();
             deStartDate = new DevExpress.XtraEditors.DateEdit();
             cbeLogType = new DevExpress.XtraEditors.ImageComboBoxEdit();
@@ -52,15 +52,15 @@
             lciLogType = new DevExpress.XtraLayout.LayoutControlItem();
             lciStartDate = new DevExpress.XtraLayout.LayoutControlItem();
             lciEndDate = new DevExpress.XtraLayout.LayoutControlItem();
-            lciFilter = new DevExpress.XtraLayout.LayoutControlItem();
             esiFilters = new DevExpress.XtraLayout.EmptySpaceItem();
+            lciSearch = new DevExpress.XtraLayout.LayoutControlItem();
             lciLogs = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)deEndDate.Properties.CalendarTimeProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)deEndDate.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)deStartDate.Properties.CalendarTimeProperties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)deEndDate.Properties.CalendarTimeProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)deStartDate.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)deStartDate.Properties.CalendarTimeProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cbeLogType.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gcLogs).BeginInit();
             ((System.ComponentModel.ISupportInitialize)integratorLogsBindingSource).BeginInit();
@@ -72,80 +72,71 @@
             ((System.ComponentModel.ISupportInitialize)lciLogType).BeginInit();
             ((System.ComponentModel.ISupportInitialize)lciStartDate).BeginInit();
             ((System.ComponentModel.ISupportInitialize)lciEndDate).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)lciFilter).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)beSearch.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)esiFilters).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)lciSearch).BeginInit();
             ((System.ComponentModel.ISupportInitialize)lciLogs).BeginInit();
             SuspendLayout();
-            //
+            // 
             // layoutControl1
-            //
+            // 
             layoutControl1.Controls.Add(lblTitle);
             layoutControl1.Controls.Add(lblSubtitle);
-            layoutControl1.Controls.Add(sbFilter);
+            layoutControl1.Controls.Add(beSearch);
             layoutControl1.Controls.Add(deEndDate);
             layoutControl1.Controls.Add(deStartDate);
             layoutControl1.Controls.Add(cbeLogType);
             layoutControl1.Controls.Add(gcLogs);
             layoutControl1.Dock = DockStyle.Fill;
             layoutControl1.Location = new Point(0, 0);
+            layoutControl1.Margin = new Padding(3, 2, 3, 2);
             layoutControl1.Name = "layoutControl1";
             layoutControl1.Root = Root;
-            layoutControl1.Size = new Size(900, 600);
+            layoutControl1.Size = new Size(771, 459);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
-            //
+            // 
             // lblTitle
-            //
+            // 
             lblTitle.Appearance.Font = new Font("Segoe UI Semibold", 15.75F);
             lblTitle.Appearance.Options.UseFont = true;
-            lblTitle.Location = new Point(24, 24);
+            lblTitle.Location = new Point(16, 16);
+            lblTitle.Margin = new Padding(3, 2, 3, 2);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(42, 30);
+            lblTitle.Size = new Size(45, 30);
             lblTitle.StyleController = layoutControl1;
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Logs";
-            //
+            // 
             // lblSubtitle
-            //
+            // 
             lblSubtitle.Appearance.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.DisabledText;
             lblSubtitle.Appearance.Options.UseForeColor = true;
-            lblSubtitle.Location = new Point(24, 62);
+            lblSubtitle.Location = new Point(16, 52);
+            lblSubtitle.Margin = new Padding(3, 2, 3, 2);
             lblSubtitle.Name = "lblSubtitle";
-            lblSubtitle.Size = new Size(330, 17);
+            lblSubtitle.Size = new Size(345, 13);
             lblSubtitle.StyleController = layoutControl1;
             lblSubtitle.TabIndex = 1;
             lblSubtitle.Text = "Registo de todas as etapas. Duplo clique numa linha para ver o detalhe.";
             //
-            // cbeLogType
+            // beSearch
             //
-            cbeLogType.Location = new Point(24, 117);
-            cbeLogType.Name = "cbeLogType";
-            cbeLogType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            cbeLogType.Size = new Size(156, 30);
-            cbeLogType.StyleController = layoutControl1;
-            cbeLogType.TabIndex = 2;
-            //
-            // deStartDate
-            //
-            deStartDate.EditValue = null;
-            deStartDate.Location = new Point(192, 117);
-            deStartDate.Name = "deStartDate";
-            deStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            deStartDate.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.True;
-            deStartDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            deStartDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy HH:mm";
-            deStartDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            deStartDate.Properties.EditFormat.FormatString = "dd-MM-yyyy HH:mm";
-            deStartDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            deStartDate.Properties.MaskSettings.Set("mask", "dd-MM-yyyy HH:mm");
-            deStartDate.Size = new Size(156, 30);
-            deStartDate.StyleController = layoutControl1;
-            deStartDate.TabIndex = 3;
-            //
+            beSearch.Location = new Point(561, 90);
+            beSearch.Margin = new Padding(3, 2, 3, 2);
+            beSearch.Name = "beSearch";
+            beSearch.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search) });
+            beSearch.Properties.NullValuePrompt = "Pesquisar nas logs...";
+            beSearch.Size = new Size(194, 28);
+            beSearch.StyleController = layoutControl1;
+            beSearch.TabIndex = 6;
+            beSearch.EditValueChanged += beSearch_EditValueChanged;
+            // 
             // deEndDate
-            //
+            // 
             deEndDate.EditValue = null;
-            deEndDate.Location = new Point(360, 117);
+            deEndDate.Location = new Point(307, 90);
+            deEndDate.Margin = new Padding(3, 2, 3, 2);
             deEndDate.Name = "deEndDate";
             deEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             deEndDate.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.True;
@@ -155,220 +146,245 @@
             deEndDate.Properties.EditFormat.FormatString = "dd-MM-yyyy HH:mm";
             deEndDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             deEndDate.Properties.MaskSettings.Set("mask", "dd-MM-yyyy HH:mm");
-            deEndDate.Size = new Size(156, 30);
+            deEndDate.Size = new Size(141, 28);
             deEndDate.StyleController = layoutControl1;
             deEndDate.TabIndex = 4;
-            //
-            // sbFilter
-            //
-            sbFilter.Location = new Point(528, 117);
-            sbFilter.Name = "sbFilter";
-            sbFilter.Size = new Size(92, 30);
-            sbFilter.StyleController = layoutControl1;
-            sbFilter.TabIndex = 5;
-            sbFilter.Text = "Filtrar";
-            sbFilter.Click += sbFilter_Click;
-            //
+            deEndDate.EditValueChanged += Filter_Changed;
+            // 
+            // deStartDate
+            // 
+            deStartDate.EditValue = null;
+            deStartDate.Location = new Point(160, 90);
+            deStartDate.Margin = new Padding(3, 2, 3, 2);
+            deStartDate.Name = "deStartDate";
+            deStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            deStartDate.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.True;
+            deStartDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            deStartDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy HH:mm";
+            deStartDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            deStartDate.Properties.EditFormat.FormatString = "dd-MM-yyyy HH:mm";
+            deStartDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            deStartDate.Properties.MaskSettings.Set("mask", "dd-MM-yyyy HH:mm");
+            deStartDate.Size = new Size(141, 28);
+            deStartDate.StyleController = layoutControl1;
+            deStartDate.TabIndex = 3;
+            deStartDate.EditValueChanged += Filter_Changed;
+            // 
+            // cbeLogType
+            // 
+            cbeLogType.Location = new Point(16, 90);
+            cbeLogType.Margin = new Padding(3, 2, 3, 2);
+            cbeLogType.Name = "cbeLogType";
+            cbeLogType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cbeLogType.Size = new Size(138, 28);
+            cbeLogType.StyleController = layoutControl1;
+            cbeLogType.TabIndex = 2;
+            cbeLogType.SelectedIndexChanged += Filter_Changed;
+            // 
             // gcLogs
-            //
+            // 
             gcLogs.DataSource = integratorLogsBindingSource;
-            gcLogs.Location = new Point(24, 163);
+            gcLogs.EmbeddedNavigator.Margin = new Padding(3, 2, 3, 2);
+            gcLogs.Location = new Point(16, 117);
             gcLogs.MainView = gvLogs;
+            gcLogs.Margin = new Padding(3, 2, 3, 2);
             gcLogs.Name = "gcLogs";
             gcLogs.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoExEdit1 });
-            gcLogs.Size = new Size(852, 413);
+            gcLogs.Size = new Size(739, 326);
             gcLogs.TabIndex = 6;
             gcLogs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gvLogs });
-            //
+            // 
             // integratorLogsBindingSource
-            //
-            integratorLogsBindingSource.DataSource = typeof(Integrador.Common.Logging.IntegratorLog);
-            //
+            // 
+            integratorLogsBindingSource.DataSource = typeof(Common.Logging.IntegratorLog);
+            // 
             // gvLogs
-            //
+            // 
             gvLogs.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colTimestamp, colLevel, colSource, colMessage, colException, colPayload });
+            gvLogs.DetailHeight = 268;
             gvLogs.GridControl = gcLogs;
             gvLogs.Name = "gvLogs";
             gvLogs.OptionsBehavior.Editable = false;
             gvLogs.OptionsBehavior.ReadOnly = true;
-            gvLogs.OptionsFind.AlwaysVisible = true;
-            gvLogs.OptionsFind.FindNullPrompt = "Pesquisar nas logs...";
-            gvLogs.OptionsFind.ShowFindButton = false;
+            gvLogs.OptionsEditForm.PopupEditFormWidth = 686;
             gvLogs.RowCellStyle += gvLogs_RowCellStyle;
             gvLogs.CustomColumnDisplayText += gvLogs_CustomColumnDisplayText;
             gvLogs.DoubleClick += gvLogs_DoubleClick;
-            //
+            // 
             // colTimestamp
-            //
+            // 
             colTimestamp.Caption = "Data";
             colTimestamp.DisplayFormat.FormatString = "dd-MM-yyyy HH:mm:ss";
             colTimestamp.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             colTimestamp.FieldName = "LoggedAt";
             colTimestamp.GroupFormat.FormatString = "dd-MM-yyyy HH:mm:ss";
             colTimestamp.GroupFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            colTimestamp.MinWidth = 17;
             colTimestamp.Name = "colTimestamp";
             colTimestamp.Visible = true;
             colTimestamp.VisibleIndex = 0;
-            colTimestamp.Width = 140;
-            //
+            colTimestamp.Width = 120;
+            // 
             // colLevel
-            //
+            // 
             colLevel.AppearanceCell.Font = new Font("Segoe UI Semibold", 9.75F);
             colLevel.AppearanceCell.Options.UseFont = true;
             colLevel.Caption = "Nível";
             colLevel.FieldName = "Level";
+            colLevel.MinWidth = 17;
             colLevel.Name = "colLevel";
             colLevel.Visible = true;
             colLevel.VisibleIndex = 1;
-            colLevel.Width = 100;
-            //
+            colLevel.Width = 86;
+            // 
             // colSource
-            //
+            // 
             colSource.Caption = "Origem";
             colSource.FieldName = "Source";
+            colSource.MinWidth = 17;
             colSource.Name = "colSource";
             colSource.Visible = true;
             colSource.VisibleIndex = 2;
-            colSource.Width = 140;
-            //
+            colSource.Width = 120;
+            // 
             // colMessage
-            //
+            // 
             colMessage.Caption = "Mensagem";
             colMessage.FieldName = "Message";
+            colMessage.MinWidth = 17;
             colMessage.Name = "colMessage";
             colMessage.Visible = true;
             colMessage.VisibleIndex = 3;
-            colMessage.Width = 360;
-            //
+            colMessage.Width = 309;
+            // 
             // colException
-            //
+            // 
             colException.Caption = "Exceção";
             colException.ColumnEdit = repositoryItemMemoExEdit1;
             colException.FieldName = "Exception";
+            colException.MinWidth = 17;
             colException.Name = "colException";
             colException.Visible = true;
             colException.VisibleIndex = 4;
-            colException.Width = 160;
-            //
+            colException.Width = 137;
+            // 
             // repositoryItemMemoExEdit1
-            //
+            // 
             repositoryItemMemoExEdit1.AutoHeight = false;
             repositoryItemMemoExEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             repositoryItemMemoExEdit1.Name = "repositoryItemMemoExEdit1";
-            //
+            // 
             // colPayload
-            //
+            // 
             colPayload.Caption = "Payload";
             colPayload.FieldName = "Payload";
+            colPayload.MinWidth = 17;
             colPayload.Name = "colPayload";
-            colPayload.Width = 72;
-            //
+            colPayload.Width = 62;
+            // 
             // Root
-            //
+            // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { lciTitle, lciSubtitle, lciLogType, lciStartDate, lciEndDate, lciFilter, esiFilters, lciLogs });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { lciTitle, lciSubtitle, lciLogType, lciStartDate, lciEndDate, esiFilters, lciSearch, lciLogs });
             Root.Name = "Root";
-            Root.Padding = new DevExpress.XtraLayout.Utils.Padding(22, 22, 22, 22);
-            Root.Size = new Size(900, 600);
+            Root.Size = new Size(771, 459);
             Root.TextVisible = false;
-            //
+            // 
             // lciTitle
-            //
+            // 
             lciTitle.Control = lblTitle;
             lciTitle.Location = new Point(0, 0);
             lciTitle.Name = "lciTitle";
-            lciTitle.Size = new Size(856, 38);
+            lciTitle.Size = new Size(745, 36);
             lciTitle.TextVisible = false;
-            //
+            // 
             // lciSubtitle
-            //
+            // 
             lciSubtitle.Control = lblSubtitle;
-            lciSubtitle.Location = new Point(0, 38);
+            lciSubtitle.Location = new Point(0, 36);
             lciSubtitle.Name = "lciSubtitle";
-            lciSubtitle.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 0, 12);
-            lciSubtitle.Size = new Size(856, 31);
+            lciSubtitle.Size = new Size(745, 19);
             lciSubtitle.TextVisible = false;
-            //
+            // 
             // lciLogType
-            //
+            // 
             lciLogType.Control = cbeLogType;
-            lciLogType.Location = new Point(0, 69);
-            lciLogType.MaxSize = new Size(168, 0);
-            lciLogType.MinSize = new Size(168, 56);
+            lciLogType.Location = new Point(0, 55);
+            lciLogType.MaxSize = new Size(144, 40);
+            lciLogType.MinSize = new Size(144, 20);
             lciLogType.Name = "lciLogType";
-            lciLogType.Size = new Size(168, 56);
+            lciLogType.Size = new Size(144, 40);
             lciLogType.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             lciLogType.Text = "Nível";
             lciLogType.TextLocation = DevExpress.Utils.Locations.Top;
-            lciLogType.TextSize = new Size(60, 17);
-            //
+            lciLogType.TextSize = new Size(30, 13);
+            // 
             // lciStartDate
-            //
+            // 
             lciStartDate.Control = deStartDate;
-            lciStartDate.Location = new Point(168, 69);
-            lciStartDate.MaxSize = new Size(168, 0);
-            lciStartDate.MinSize = new Size(168, 56);
+            lciStartDate.Location = new Point(144, 55);
+            lciStartDate.MaxSize = new Size(147, 40);
+            lciStartDate.MinSize = new Size(56, 20);
             lciStartDate.Name = "lciStartDate";
-            lciStartDate.Size = new Size(168, 56);
+            lciStartDate.Size = new Size(147, 40);
             lciStartDate.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             lciStartDate.Text = "Desde";
             lciStartDate.TextLocation = DevExpress.Utils.Locations.Top;
-            lciStartDate.TextSize = new Size(60, 17);
-            //
+            lciStartDate.TextSize = new Size(30, 13);
+            // 
             // lciEndDate
-            //
+            // 
             lciEndDate.Control = deEndDate;
-            lciEndDate.Location = new Point(336, 69);
-            lciEndDate.MaxSize = new Size(168, 0);
-            lciEndDate.MinSize = new Size(168, 56);
+            lciEndDate.Location = new Point(291, 55);
+            lciEndDate.MaxSize = new Size(147, 40);
+            lciEndDate.MinSize = new Size(56, 20);
             lciEndDate.Name = "lciEndDate";
-            lciEndDate.Size = new Size(168, 56);
+            lciEndDate.Size = new Size(147, 40);
             lciEndDate.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             lciEndDate.Text = "Até";
             lciEndDate.TextLocation = DevExpress.Utils.Locations.Top;
-            lciEndDate.TextSize = new Size(60, 17);
-            //
-            // lciFilter
-            //
-            lciFilter.Control = sbFilter;
-            lciFilter.ControlAlignment = ContentAlignment.BottomLeft;
-            lciFilter.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 12);
-            lciFilter.FillControlToClientArea = false;
-            lciFilter.Location = new Point(504, 69);
-            lciFilter.MaxSize = new Size(104, 0);
-            lciFilter.MinSize = new Size(104, 56);
-            lciFilter.Name = "lciFilter";
-            lciFilter.Size = new Size(104, 56);
-            lciFilter.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            lciFilter.TextVisible = false;
-            //
+            lciEndDate.TextSize = new Size(30, 13);
+            // 
             // esiFilters
-            //
-            esiFilters.Location = new Point(608, 69);
+            // 
+            esiFilters.Location = new Point(438, 55);
             esiFilters.Name = "esiFilters";
-            esiFilters.Size = new Size(248, 56);
+            esiFilters.Size = new Size(107, 40);
             //
+            // lciSearch
+            //
+            lciSearch.Control = beSearch;
+            lciSearch.Location = new Point(545, 55);
+            lciSearch.MaxSize = new Size(320, 40);
+            lciSearch.MinSize = new Size(200, 20);
+            lciSearch.Name = "lciSearch";
+            lciSearch.Size = new Size(200, 40);
+            lciSearch.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            lciSearch.Text = "Pesquisar";
+            lciSearch.TextLocation = DevExpress.Utils.Locations.Top;
+            lciSearch.TextSize = new Size(30, 13);
+            // 
             // lciLogs
-            //
+            // 
             lciLogs.Control = gcLogs;
-            lciLogs.Location = new Point(0, 125);
+            lciLogs.Location = new Point(0, 95);
+            lciLogs.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 12, 0);
             lciLogs.Name = "lciLogs";
-            lciLogs.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 14, 2);
-            lciLogs.Size = new Size(856, 431);
+            lciLogs.Size = new Size(745, 332);
             lciLogs.TextVisible = false;
-            //
+            // 
             // LogsUserControl
-            //
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            // 
+            AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(layoutControl1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "LogsUserControl";
-            Size = new Size(900, 600);
+            Size = new Size(771, 459);
             Load += LogsUserControl_Load;
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
-            layoutControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)deEndDate.Properties.CalendarTimeProperties).EndInit();
             ((System.ComponentModel.ISupportInitialize)deEndDate.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)deStartDate.Properties.CalendarTimeProperties).EndInit();
@@ -384,8 +400,9 @@
             ((System.ComponentModel.ISupportInitialize)lciLogType).EndInit();
             ((System.ComponentModel.ISupportInitialize)lciStartDate).EndInit();
             ((System.ComponentModel.ISupportInitialize)lciEndDate).EndInit();
-            ((System.ComponentModel.ISupportInitialize)lciFilter).EndInit();
+            ((System.ComponentModel.ISupportInitialize)beSearch.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)esiFilters).EndInit();
+            ((System.ComponentModel.ISupportInitialize)lciSearch).EndInit();
             ((System.ComponentModel.ISupportInitialize)lciLogs).EndInit();
             ResumeLayout(false);
         }
@@ -409,14 +426,14 @@
         private DevExpress.XtraEditors.DateEdit deEndDate;
         private DevExpress.XtraEditors.DateEdit deStartDate;
         private DevExpress.XtraEditors.ImageComboBoxEdit cbeLogType;
-        private DevExpress.XtraEditors.SimpleButton sbFilter;
         private DevExpress.XtraLayout.LayoutControlItem lciTitle;
         private DevExpress.XtraLayout.LayoutControlItem lciSubtitle;
         private DevExpress.XtraLayout.LayoutControlItem lciLogType;
         private DevExpress.XtraLayout.LayoutControlItem lciStartDate;
         private DevExpress.XtraLayout.LayoutControlItem lciEndDate;
-        private DevExpress.XtraLayout.LayoutControlItem lciFilter;
         private DevExpress.XtraLayout.EmptySpaceItem esiFilters;
+        private DevExpress.XtraEditors.ButtonEdit beSearch;
+        private DevExpress.XtraLayout.LayoutControlItem lciSearch;
         private DevExpress.XtraLayout.LayoutControlItem lciLogs;
     }
 }

@@ -35,7 +35,9 @@ src/
 - Configurações do destino (URL, utilizador, password) já existem em `IntegratorSettings`. O módulo do destino (adapter igual ao da origem) cria-se quando se souber a API a usar, com `Contracts/` consumidos pelo Integration.
 - Sem base de dados. Estado local (ex: registos já integrados) em ficheiro ao lado do exe, se for preciso.
 - Modelos de domínio da integração (mapeamento origem -> destino) ficam em `Integrador.Integration/Domain`.
-- Páginas que dependem do resultado da integração implementam `IRefreshable`. O MainForm atualiza-as no fim de cada execução.
+- Páginas que dependem do resultado da integração implementam `IRefreshable`. O MainForm atualiza-as no fim de cada execução e sempre que se volta a elas no menu.
+- Filtros aplicam-se logo ao mudar (sem botão Filtrar/Atualizar). Pesquisa em grelha com um `ButtonEdit` na linha dos filtros (`ApplyFindFilter`), não o find panel da grelha.
+- Alinhamento no LayoutControl: o autoscale aumenta `Size`/`MinSize`/`MaxSize` mas não a altura dos editores. Linhas de editores com `MaxSize` de altura fixa; espaço entre blocos com `Spacing`, não `Padding` (que substitui o padding por defeito).
 - Histórico de execuções em `History/runs.log` (IIntegrationRunHistory, módulo Integration).
 - UI sempre no designer (`*.Designer.cs`). User controls recebem dependências no construtor e são resolvidos pelo DI (`MainForm.ShowPage<T>`).
 - Aspeto: skin WXI fixo (sem escolha de skins), tema claro/escuro na barra de título, cor de destaque em `AppInfo.AccentColor`.

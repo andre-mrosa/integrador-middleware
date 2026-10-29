@@ -127,12 +127,16 @@ namespace Integrador.UI
 
         /// <summary>
         /// Mostra a página (resolvida pelo DI na primeira vez) e marca o item no menu lateral.
+        /// Páginas IRefreshable recarregam sempre que se volta a elas.
         /// </summary>
-        private void ShowPage<T>(AccordionControlElement element) where T : XtraUserControl
+        private async void ShowPage<T>(AccordionControlElement element) where T : XtraUserControl
         {
             try
             {
-                if (!_pages.TryGetValue(typeof(T), out XtraUserControl? page))
+                // Página já aberta e vinda de outra: recarrega depois de mostrar (na primeira vez quem carrega é o Load)
+                bool reopened = _pages.TryGetValue(typeof(T), out XtraUserControl? page) && accordionControl1.SelectedElement != element;
+
+                if (page == null)
                 {
                     page = CreatePage<T>();
                     page.Dock = DockStyle.Fill;
@@ -143,6 +147,9 @@ namespace Integrador.UI
                 page.BringToFront();
                 accordionControl1.SelectedElement = element;
                 UiPreferences.Current.LastPage = typeof(T).Name;
+
+                if (reopened && page is IRefreshable refreshable)
+                    await refreshable.RefreshDataAsync();
             }
             catch (Exception ex)
             {

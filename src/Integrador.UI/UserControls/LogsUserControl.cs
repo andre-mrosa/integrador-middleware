@@ -13,6 +13,7 @@ namespace Integrador.UI.UserControls
     public partial class LogsUserControl : XtraUserControl, IRefreshable
     {
         private readonly ILogQueryService _logQuery;
+        private bool _filtersReady;
 
         public LogsUserControl(ILogQueryService logQuery)
         {
@@ -28,15 +29,21 @@ namespace Integrador.UI.UserControls
             deStartDate.EditValue = DateTime.Today.AddDays(-7);
             deEndDate.EditValue = DateTime.Today;
 
+            _filtersReady = true;
             await LoadLogsAsync();
         }
 
-        private async void sbFilter_Click(object sender, EventArgs e)
+        /// <summary>Nível e datas aplicam-se logo que mudam. Ignorado enquanto o Load preenche os valores iniciais.</summary>
+        private async void Filter_Changed(object? sender, EventArgs e)
         {
-            await LoadLogsAsync();
+            if (_filtersReady)
+                await LoadLogsAsync();
         }
 
         public Task RefreshDataAsync() => LoadLogsAsync();
+
+        /// <summary>Pesquisa em todas as colunas das logs já carregadas (sem voltar a ler os ficheiros).</summary>
+        private void beSearch_EditValueChanged(object sender, EventArgs e) => gvLogs.ApplyFindFilter(beSearch.Text);
 
         private void gvLogs_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
