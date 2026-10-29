@@ -22,6 +22,7 @@ src/
   Integrador.UI/                Host WinForms e composition root (DI via Microsoft.Extensions.Hosting)
     AppInfo.cs                  Nome da app, nomes de origem/destino, cor de destaque
     Configuration/AppTheme.cs   Skin WXI, tema claro/escuro, estilo comum das grelhas
+    Configuration/UiPreferences.cs  Tema, janela, última página e menu recolhido (%LocalAppData%\{AppInfo.StorageFolder}\preferences.json)
     MainForm                    FluentDesignForm + AccordionControl (menu lateral). Páginas criadas uma vez e mantidas
     UserControls/               Início (cartões HTML + histórico), Configurações (origem + destino), Logs, Agendamento
     Forms/                      LogDetailForm (duplo clique nas logs)

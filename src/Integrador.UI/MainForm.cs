@@ -29,9 +29,20 @@ namespace Integrador.UI
 
             Text = $"{AppInfo.Name}  v{AppInfo.Version}";
             UpdateThemeButton();
+            RestoreWindowState();
         }
 
-        private void MainForm_Shown(object? sender, EventArgs e) => ShowPage<HomeUserControl>(aceHome);
+        private void MainForm_Shown(object? sender, EventArgs e)
+        {
+            // Reabre a última página usada
+            switch (UiPreferences.Current.LastPage)
+            {
+                case nameof(LogsUserControl): ShowPage<LogsUserControl>(aceLogs); break;
+                case nameof(SchedulerUserControl): ShowPage<SchedulerUserControl>(aceScheduler); break;
+                case nameof(ConfigurationsUserControl): ShowPage<ConfigurationsUserControl>(aceConfigs); break;
+                default: ShowPage<HomeUserControl>(aceHome); break;
+            }
+        }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -39,7 +50,46 @@ namespace Integrador.UI
                 XtraMessageBox.Show("Está uma integração em curso. Fechar agora pode deixar dados a meio.\nTem a certeza que pretende sair?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 e.Cancel = true;
+                return;
             }
+
+            SaveWindowState();
+        }
+
+        /// <summary>
+        /// Repõe tamanho, posição e menu como ficaram na última sessão. Se o ecrã onde estava já não existir, abre centrado.
+        /// </summary>
+        private void RestoreWindowState()
+        {
+            var prefs = UiPreferences.Current;
+
+            if (prefs.WindowBounds is [int x, int y, int width, int height])
+            {
+                var bounds = new Rectangle(x, y, width, height);
+                if (Screen.AllScreens.Any(s => s.WorkingArea.IntersectsWith(bounds)))
+                {
+                    StartPosition = FormStartPosition.Manual;
+                    Bounds = bounds;
+                }
+            }
+
+            if (prefs.WindowMaximized)
+                WindowState = FormWindowState.Maximized;
+
+            if (prefs.MenuMinimized)
+                accordionControl1.OptionsMinimizing.State = AccordionControlState.Minimized;
+        }
+
+        private void SaveWindowState()
+        {
+            var prefs = UiPreferences.Current;
+
+            Rectangle bounds = WindowState == FormWindowState.Normal ? Bounds : RestoreBounds;
+            prefs.WindowBounds = [bounds.X, bounds.Y, bounds.Width, bounds.Height];
+            prefs.WindowMaximized = WindowState == FormWindowState.Maximized;
+            prefs.MenuMinimized = accordionControl1.OptionsMinimizing.State == AccordionControlState.Minimized;
+
+            UiPreferences.Save();
         }
 
         private void aceHome_Click(object sender, EventArgs e) => ShowPage<HomeUserControl>(aceHome);
@@ -92,6 +142,7 @@ namespace Integrador.UI
 
                 page.BringToFront();
                 accordionControl1.SelectedElement = element;
+                UiPreferences.Current.LastPage = typeof(T).Name;
             }
             catch (Exception ex)
             {

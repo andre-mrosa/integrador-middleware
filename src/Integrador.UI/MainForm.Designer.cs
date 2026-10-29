@@ -33,7 +33,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             fluentDesignFormContainer1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormContainer();
             accordionControl1 = new DevExpress.XtraBars.Navigation.AccordionControl();
-            aceNav = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             aceHome = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             aceLogs = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             aceScheduler = new DevExpress.XtraBars.Navigation.AccordionControlElement();
@@ -64,7 +63,7 @@
             accordionControl1.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             accordionControl1.AllowItemSelection = true;
             accordionControl1.Dock = DockStyle.Left;
-            accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] { aceNav });
+            accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] { aceHome, aceLogs, aceScheduler, aceConfigs });
             accordionControl1.ItemHeight = 40;
             accordionControl1.Location = new Point(0, 39);
             accordionControl1.Name = "accordionControl1";
@@ -74,14 +73,6 @@
             accordionControl1.Size = new Size(240, 720);
             accordionControl1.TabIndex = 1;
             accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
-            //
-            // aceNav
-            //
-            aceNav.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] { aceHome, aceLogs, aceScheduler, aceConfigs });
-            aceNav.Expanded = true;
-            aceNav.HeaderVisible = false;
-            aceNav.Name = "aceNav";
-            aceNav.Text = "Navegação";
             //
             // aceHome
             //
@@ -180,7 +171,6 @@
 
         private DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormContainer fluentDesignFormContainer1;
         private DevExpress.XtraBars.Navigation.AccordionControl accordionControl1;
-        private DevExpress.XtraBars.Navigation.AccordionControlElement aceNav;
         private DevExpress.XtraBars.Navigation.AccordionControlElement aceHome;
         private DevExpress.XtraBars.Navigation.AccordionControlElement aceLogs;
         private DevExpress.XtraBars.Navigation.AccordionControlElement aceScheduler;

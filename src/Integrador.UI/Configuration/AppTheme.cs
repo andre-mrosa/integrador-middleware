@@ -10,10 +10,12 @@ namespace Integrador.UI.Configuration
     /// </summary>
     internal static class AppTheme
     {
-        private const string LightPalette = "Freshness";
         private const string DarkPalette = "Darkness";
 
-        public static bool IsDark => UserLookAndFeel.Default.ActiveSvgPaletteName == DarkPalette;
+        /// <summary>Paleta por defeito do WXI (Freshness). Tem de ser pedida por este nome, senão o skin mantém a paleta atual.</summary>
+        private const string LightPalette = "DefaultSkinPalette";
+
+        public static bool IsDark => UiPreferences.Current.DarkTheme;
 
         /// <summary>Chamar antes de criar qualquer form.</summary>
         public static void Initialize()
@@ -22,17 +24,23 @@ namespace Integrador.UI.Configuration
             WindowsFormsSettings.DefaultMenuFont = new Font("Segoe UI", 9.75F);
             WindowsFormsSettings.ScrollUIMode = ScrollUIMode.Fluent;
             WindowsFormsSettings.AllowRoundedWindowCorners = DefaultBoolean.True;
-            WindowsFormsSettings.SetAccentColor(AppInfo.AccentColor);
 
-            bool dark = SkinSettings.GetSkinSettings().PaletteName == DarkPalette;
-            UserLookAndFeel.Default.SetSkinStyle(SkinStyle.WXI, dark ? DarkPalette : LightPalette);
+            ApplyPalette();
         }
 
         public static void ToggleDark()
         {
-            UserLookAndFeel.Default.SetSkinStyle(SkinStyle.WXI, IsDark ? LightPalette : DarkPalette);
+            UiPreferences.Current.DarkTheme = !UiPreferences.Current.DarkTheme;
+            ApplyPalette();
+            UiPreferences.Save();
+        }
+
+        private static void ApplyPalette()
+        {
+            UserLookAndFeel.Default.SetSkinStyle(SkinStyle.WXI, IsDark ? DarkPalette : LightPalette);
+
+            // A troca de paleta repõe a cor de destaque do skin
             WindowsFormsSettings.SetAccentColor(AppInfo.AccentColor);
-            SkinSettings.SaveSkin(new SkinSettings { SkinName = SkinStyle.WXI.ToString(), PaletteName = UserLookAndFeel.Default.ActiveSvgPaletteName });
         }
 
         /// <summary>
